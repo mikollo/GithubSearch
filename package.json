@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "precommit": "lint-staged"
+    "test": "jest"
   },
   "dependencies": {
     "react": "16.6.1",
@@ -29,7 +28,8 @@
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.16.0",
     "tslint-react": "^3.6.0",
-    "typescript": "^3.1.6"
+    "typescript": "^3.1.6",
+    "xhr-mock": "^2.4.1"
   },
   "jest": {
     "preset": "react-native",
@@ -39,20 +39,20 @@
       "js"
     ],
     "transform": {
-      "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
-      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      "^.+\\.(js)$": "<rootDir>/node_modules/react-native/jest/preprocessor.js",
+      "\\.(ts|tsx)$": "ts-jest"
     },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!react-native|react-navigation)"
+    ],
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
     "testPathIgnorePatterns": [
       "\\.snap$",
-      "<rootDir>/node_modules/"
+      "<rootDir>/node_modules/",
+      "<rootDir>/ios/",
+      "<rootDir>/android/",
+      "<rootDir>/e2e/"
     ],
     "cacheDirectory": ".jest/cache"
-  },
-  "lint-staged": {
-    "{src,test}/**/*.ts*": [
-      "prettier --write",
-      "git add"
-    ]
   }
 }
