@@ -16,10 +16,7 @@ function selectDataFromSearchResult(searchItem: GithubSearchItemInterface) {
 function* runSearchRequest(action: any) {
   try {
     yield put({ type: actionTypes.UPDATE_SEARCH_RESULTS_STARTED });
-    const searchResults = yield call(
-      githubApiSearchHelper,
-      action.payload.text
-    );
+    const searchResults = yield call(githubApiSearchHelper, action.payload);
     yield put({
       type: actionTypes.UPDATE_SEARCH_RESULTS_SUCCEEDED,
       payload: searchResults.map(selectDataFromSearchResult)

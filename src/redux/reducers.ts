@@ -1,9 +1,9 @@
 import { actionTypes } from "./actions";
 
 export interface SearchItemInterface {
-  starCount?: number;
-  fullName?: string;
-  avatar?: string;
+  starCount: number;
+  fullName: string;
+  avatar: string;
   picked: boolean;
   id: number;
 }

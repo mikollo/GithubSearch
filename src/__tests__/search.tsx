@@ -8,24 +8,31 @@ beforeEach(() => mock.setup());
 afterEach(() => mock.teardown());
 
 test("Renders correctly", async () => {
-  const tree = renderer.create(<App />);
-  expect(tree.toJSON()).toMatchSnapshot();
+  const testRendererInstance = renderer.create(<App />);
+  expect(testRendererInstance.toJSON()).toMatchSnapshot();
 });
 
-test("Displays results after user types", async () => {
+test("Displays results after user types", done => {
   // mock  github api
   mock.get("https://api.github.com/search/repositories?q=react", {
     status: 200,
     body: JSON.stringify(sampleData)
   });
+
   // render app
-  const tree = renderer.create(<App />);
+  const testRendererInstance = renderer.create(<App />);
   // find TextInput and invoke search
-  await tree.root
+  testRendererInstance.root
     .findByProps({ placeholder: "Search repos" })
     .props.onChangeText("react");
-  // check snapshot correctness
-  // however this generates a little bit too big snapshot
-  // it could be improved
-  expect(tree.toJSON()).toMatchSnapshot();
+  // this is somewhat hacky
+  // way to run check after all actions have been executed
+  // but it is independent of implementation details
+  setTimeout(() => {
+    expect(
+      testRendererInstance.root.findByProps({ children: "facebook/react" })
+    ).toBeDefined();
+    expect(testRendererInstance.toJSON()).toMatchSnapshot();
+    done();
+  }, 5);
 });

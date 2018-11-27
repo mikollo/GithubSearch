@@ -1,14 +1,28 @@
 import React, { Component } from "react";
 import Results from "./components/Results";
-import { View, TextInput, Text, ActivityIndicator } from "react-native";
+import { View, TextInput, Text, ActivityIndicator, Button } from "react-native";
 import { connect } from "react-redux";
 import { actions } from "../redux/actions";
-import { StateInterface } from "../redux/reducers";
+import { StateInterface, SearchItemInterface } from "../redux/reducers";
 
-class Main extends Component<any> {
+interface Props {
+  reduxState: StateInterface;
+  updateSearchResults: (text: string) => void;
+  toggleItem: (item: SearchItemInterface) => void;
+}
+
+class Main extends Component<Props> {
+  calculateTotalSelectedItemsStarCount = (
+    searchResults: StateInterface["searchResults"]
+  ) =>
+    searchResults
+      .filter(item => item.picked)
+      .map(item => item.starCount)
+      .reduce((augend, addend) => augend + addend, 0);
+
   render() {
     return (
-      <View style={{ padding: 20 }}>
+      <View style={{ padding: 20, flex: 1 }}>
         <TextInput
           placeholder="Search repos"
           onChangeText={this.props.updateSearchResults}
@@ -22,6 +36,11 @@ class Main extends Component<any> {
             onToggle={this.props.toggleItem}
           />
         )}
+        <Text>
+          {this.calculateTotalSelectedItemsStarCount(
+            this.props.reduxState.searchResults
+          )}
+        </Text>
       </View>
     );
   }
