@@ -14,7 +14,7 @@ function selectDataFromSearchResult(searchItem: GithubSearchItemInterface) {
   };
 }
 
-function* runSearchRequest(action: string) {
+function* runSearchRequest(action: any) {
   try {
     yield put({ type: actionTypes.UPDATE_SEARCH_RESULTS_STARTED });
     const searchResults = yield call(githubApiSearchHelper, action.payload);
