@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavigationScreenProp } from "react-navigation";
-import { TextInput, SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native";
 import { connect } from "react-redux";
 import { actions } from "../redux/actions";
 import { StateInterface, SearchItemInterface } from "../redux/reducers";

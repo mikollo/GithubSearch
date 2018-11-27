@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { View, Button } from "react-native";
+import { theme } from "../../constants";
 
 const Footer: React.SFC<Button["props"]> = props => (
-  <View style={{ padding: 20 }}>
+  <View style={{ padding: theme.spacing }}>
     <Button {...props} />
   </View>
 );

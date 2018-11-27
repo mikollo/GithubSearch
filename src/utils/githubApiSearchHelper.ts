@@ -1,4 +1,7 @@
+import { endpoint } from "../constants";
+
 const requests: XMLHttpRequest[] = [];
+
 export default function githubApiSearchHelper(query: string) {
   return new Promise((resolve, reject) => {
     requests.forEach(prevRequest => prevRequest.abort());
@@ -22,10 +25,7 @@ export default function githubApiSearchHelper(query: string) {
         }
       }
     };
-    request.open(
-      "GET",
-      `https://api.github.com/search/repositories?q=${query}`
-    );
+    request.open("GET", endpoint + `/search/repositories?q=${query}`);
     request.send();
   });
 }
