@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Linking } from "react-native";
+import { View, Linking, SafeAreaView } from "react-native";
 import { connect } from "react-redux";
 import { actions } from "../redux/actions";
 import { StateInterface, SearchItemInterface } from "../redux/reducers";
@@ -16,12 +16,12 @@ class Main extends Component<Props> {
 
   render() {
     return (
-      <View style={{ padding: 20, flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <Results
           data={this.props.reduxState.searchResults.filter(item => item.picked)}
           onResultPress={this.openRepoLink}
         />
-      </View>
+      </SafeAreaView>
     );
   }
 }

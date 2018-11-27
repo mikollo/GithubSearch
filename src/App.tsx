@@ -15,7 +15,8 @@ const StackNavigator = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Main"
+    initialRouteName: "Main",
+    headerMode: "none"
   }
 );
 

@@ -11,6 +11,7 @@ export default class Results extends React.Component<{
     return (
       <FlatList
         data={this.props.data}
+        style={{ width: "100%" }}
         keyExtractor={(item: SearchItemInterface) => item.id.toString()}
         renderItem={({ item }: { item: SearchItemInterface }) => (
           <ResultItem item={item} onResultPress={this.props.onResultPress} />

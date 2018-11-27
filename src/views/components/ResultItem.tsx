@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, Text, Image } from "react-native";
+import { TouchableOpacity, View, Text, Image } from "react-native";
 import { SearchItemInterface } from "../../redux/reducers";
 
 interface ResultItemProps {
@@ -9,15 +9,36 @@ interface ResultItemProps {
 
 const ResultItem: React.SFC<ResultItemProps> = props => (
   <TouchableOpacity
-    style={{ backgroundColor: props.item.picked ? "gray" : "white" }}
+    style={{
+      padding: 20,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}
     onPress={() => props.onResultPress(props.item)}
   >
-    <Text>{props.item.fullName}</Text>
-    <Text>{props.item.starCount}</Text>
-    <Image
-      style={{ width: 20, height: 20, borderRadius: 10 }}
-      source={{ uri: props.item.avatar }}
-    />
+    <Text
+      style={{
+        color: props.item.picked ? "red" : "black"
+      }}
+    >
+      {props.item.fullName}
+      {`\n`}
+      {props.item.starCount}
+    </Text>
+    <View
+      style={{
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        backgroundColor: "gray"
+      }}
+    >
+      <Image
+        style={{ width: 50, height: 50, borderRadius: 25 }}
+        source={{ uri: props.item.avatar }}
+      />
+    </View>
   </TouchableOpacity>
 );
 

@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import { NavigationScreenProp } from "react-navigation";
-import { View, TextInput, Text, ActivityIndicator, Button } from "react-native";
+import {
+  View,
+  TextInput,
+  Text,
+  ActivityIndicator,
+  Button,
+  SafeAreaView
+} from "react-native";
 import { connect } from "react-redux";
 import { actions } from "../redux/actions";
 import { StateInterface, SearchItemInterface } from "../redux/reducers";
@@ -24,21 +31,32 @@ class Main extends Component<Props> {
 
   render() {
     return (
-      <View style={{ padding: 20, flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <TextInput
+          style={{ padding: 20, fontSize: 18 }}
           placeholder="Search repos"
           onChangeText={this.props.updateSearchResults}
         />
-        {this.props.reduxState.inProgress ? <ActivityIndicator /> : null}
-        {this.props.reduxState.error ? (
-          <Text>😟</Text>
-        ) : (
-          <Results
-            data={this.props.reduxState.searchResults}
-            onResultPress={this.props.toggleItem}
-          />
-        )}
-        <View>
+        {
+          <View
+            style={{
+              backgroundColor: "white",
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            {this.props.reduxState.inProgress ? (
+              <ActivityIndicator />
+            ) : (
+              <Results
+                data={this.props.reduxState.searchResults}
+                onResultPress={this.props.toggleItem}
+              />
+            )}
+          </View>
+        }
+        <View style={{ padding: 20 }}>
           <Button
             title={`Show selected (${this.calculateTotalSelectedItemsStarCount(
               this.props.reduxState.searchResults
@@ -46,7 +64,7 @@ class Main extends Component<Props> {
             onPress={() => this.props.navigation.navigate("SelectedItems")}
           />
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }

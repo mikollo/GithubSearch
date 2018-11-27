@@ -7,8 +7,8 @@ function selectDataFromSearchResult(searchItem: GithubSearchItemInterface) {
   return {
     starCount: searchItem.stargazers_count,
     fullName: searchItem.full_name,
-    avatar: searchItem.owner.html_url,
-    repoLink: searchItem.url,
+    avatar: searchItem.owner.avatar_url,
+    repoLink: searchItem.html_url,
     picked: false,
     id: searchItem.id
   };
