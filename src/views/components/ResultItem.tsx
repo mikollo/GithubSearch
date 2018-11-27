@@ -8,7 +8,10 @@ interface ResultItemProps {
 }
 
 const ResultItem: React.SFC<ResultItemProps> = props => (
-  <TouchableOpacity onPress={() => props.onToggle(props.item)}>
+  <TouchableOpacity
+    style={{ backgroundColor: props.item.picked ? "gray" : "white" }}
+    onPress={() => props.onToggle(props.item)}
+  >
     <Text>{props.item.fullName}</Text>
     <Text>{props.item.starCount}</Text>
     <Image

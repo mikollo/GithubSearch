@@ -5,6 +5,7 @@ import ResultItem from "./ResultItem";
 
 export default class Results extends React.Component<{
   data: SearchItemInterface[];
+  onToggle: (item: SearchItemInterface) => void;
 }> {
   render() {
     return (
@@ -12,10 +13,7 @@ export default class Results extends React.Component<{
         data={this.props.data}
         keyExtractor={(item: SearchItemInterface) => item.id.toString()}
         renderItem={({ item }: { item: SearchItemInterface }) => (
-          <ResultItem
-            item={item}
-            onToggle={toggledItem => console.warn(toggledItem)}
-          />
+          <ResultItem item={item} onToggle={this.props.onToggle} />
         )}
       />
     );

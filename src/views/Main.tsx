@@ -7,7 +7,6 @@ import { StateInterface } from "../redux/reducers";
 
 class Main extends Component<any> {
   render() {
-    console.warn(this.props.reduxState.inProgress);
     return (
       <View style={{ padding: 20 }}>
         <TextInput
@@ -18,7 +17,10 @@ class Main extends Component<any> {
         {this.props.reduxState.error ? (
           <Text>😟</Text>
         ) : (
-          <Results data={this.props.reduxState.searchResults} />
+          <Results
+            data={this.props.reduxState.searchResults}
+            onToggle={this.props.toggleItem}
+          />
         )}
       </View>
     );
@@ -31,5 +33,5 @@ const mapStateToProps = (state: StateInterface) => ({
 
 export default connect(
   mapStateToProps,
-  { updateSearchResults: actions.updateSearchResults }
+  { ...actions }
 )(Main);
