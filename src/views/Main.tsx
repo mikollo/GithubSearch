@@ -1,17 +1,12 @@
 import React, { Component } from "react";
 import { NavigationScreenProp } from "react-navigation";
-import {
-  View,
-  TextInput,
-  Text,
-  ActivityIndicator,
-  Button,
-  SafeAreaView
-} from "react-native";
+import { TextInput, SafeAreaView } from "react-native";
 import { connect } from "react-redux";
 import { actions } from "../redux/actions";
 import { StateInterface, SearchItemInterface } from "../redux/reducers";
 import Results from "./components/Results";
+import Footer from "./components/Footer";
+import SearchInput from "./components/SearchInput";
 
 interface Props {
   reduxState: StateInterface;
@@ -32,38 +27,18 @@ class Main extends Component<Props> {
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        <TextInput
-          style={{ padding: 20, fontSize: 18 }}
-          placeholder="Search repos"
-          onChangeText={this.props.updateSearchResults}
+        <SearchInput onChangeText={this.props.updateSearchResults} />
+        <Results
+          inProgress={this.props.reduxState.inProgress}
+          data={this.props.reduxState.searchResults}
+          onResultPress={this.props.toggleItem}
         />
-        {
-          <View
-            style={{
-              backgroundColor: "white",
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            {this.props.reduxState.inProgress ? (
-              <ActivityIndicator />
-            ) : (
-              <Results
-                data={this.props.reduxState.searchResults}
-                onResultPress={this.props.toggleItem}
-              />
-            )}
-          </View>
-        }
-        <View style={{ padding: 20 }}>
-          <Button
-            title={`Show selected (${this.calculateTotalSelectedItemsStarCount(
-              this.props.reduxState.searchResults
-            )} total star count)`}
-            onPress={() => this.props.navigation.navigate("SelectedItems")}
-          />
-        </View>
+        <Footer
+          title={`Show selected (${this.calculateTotalSelectedItemsStarCount(
+            this.props.reduxState.searchResults
+          )} total star count)`}
+          onPress={() => this.props.navigation.navigate("SelectedItems")}
+        />
       </SafeAreaView>
     );
   }

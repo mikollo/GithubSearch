@@ -40,7 +40,7 @@ const toggleItem = (
   };
 };
 
-export default (state = initialState, action: any) => {
+export default (state = initialState, action: string) => {
   switch (action.type) {
     case actionTypes.TOGGLE_ITEM:
       return toggleItem(state, action.payload);
