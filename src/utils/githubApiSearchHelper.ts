@@ -9,7 +9,6 @@ export default function githubApiSearchHelper(query: string) {
         return;
       }
       if (request.status === 200) {
-        console.warn(query);
         resolve(JSON.parse(request.responseText).items);
       } else {
         let errorMessage = "Unknown error occured";

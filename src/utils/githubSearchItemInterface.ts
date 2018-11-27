@@ -27,13 +27,13 @@ export interface License {
   node_id: string | null;
 }
 
-export interface SearchItemInterface {
+export interface GithubSearchItemInterface {
   id: number;
   node_id: string | null;
   name: string | null;
   full_name: string | null;
   private: boolean | null;
-  owner: Owner | null;
+  owner: Owner;
   html_url: string | null;
   description: string | null;
   fork: boolean | null;
