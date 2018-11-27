@@ -16,3 +16,9 @@
 - By default ap should display recently searched list
 - Animate list item on appear.
 - Use flow or typescript. ✓
+
+## TODO's
+
+- Separate styles and styled components and improve styling of the app in general
+- Improve typing (remove some `any`'s)
+- Add more tests
