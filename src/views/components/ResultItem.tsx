@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, Text, Image } from "react-native";
-import { SearchItemInterface } from "../redux/reducers";
+import { SearchItemInterface } from "../../redux/reducers";
 
 interface ResultItemProps {
   item: SearchItemInterface;
@@ -18,4 +18,4 @@ const ResultItem: React.SFC<ResultItemProps> = props => (
   </TouchableOpacity>
 );
 
-export { ResultItem };
+export default ResultItem;

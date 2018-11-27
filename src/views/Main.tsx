@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Results from "./Results";
+import Results from "./components/Results";
 import { View, TextInput, Text, ActivityIndicator } from "react-native";
 import { connect } from "react-redux";
 import { actions } from "../redux/actions";

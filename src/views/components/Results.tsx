@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList } from "react-native";
-import { SearchItemInterface } from "../redux/reducers";
-import { ResultItem } from "../sharedComponents/styledComponents";
+import { SearchItemInterface } from "../../redux/reducers";
+import ResultItem from "./ResultItem";
 
 export default class Results extends React.Component<{
   data: SearchItemInterface[];
