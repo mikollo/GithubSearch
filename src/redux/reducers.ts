@@ -5,6 +5,7 @@ export interface SearchItemInterface {
   fullName: string;
   avatar: string;
   picked: boolean;
+  repoLink: string;
   id: number;
 }
 

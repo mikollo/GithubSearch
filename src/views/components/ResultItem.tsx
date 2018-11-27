@@ -4,13 +4,13 @@ import { SearchItemInterface } from "../../redux/reducers";
 
 interface ResultItemProps {
   item: SearchItemInterface;
-  onToggle: (item: SearchItemInterface) => void;
+  onResultPress: (item: SearchItemInterface) => void;
 }
 
 const ResultItem: React.SFC<ResultItemProps> = props => (
   <TouchableOpacity
     style={{ backgroundColor: props.item.picked ? "gray" : "white" }}
-    onPress={() => props.onToggle(props.item)}
+    onPress={() => props.onResultPress(props.item)}
   >
     <Text>{props.item.fullName}</Text>
     <Text>{props.item.starCount}</Text>

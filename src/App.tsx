@@ -1,10 +1,26 @@
 import React from "react";
 import { Provider } from "react-redux";
 import Main from "./views/Main";
+import SelectedItems from "./views/SelectedItems";
 import store from "./redux/store";
+import { createStackNavigator } from "react-navigation";
+
+const StackNavigator = createStackNavigator(
+  {
+    Main: {
+      screen: Main
+    },
+    SelectedItems: {
+      screen: SelectedItems
+    }
+  },
+  {
+    initialRouteName: "Main"
+  }
+);
 
 export default () => (
   <Provider store={store}>
-    <Main />
+    <StackNavigator />
   </Provider>
 );

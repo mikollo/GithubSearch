@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import Results from "./components/Results";
+import { NavigationScreenProp } from "react-navigation";
 import { View, TextInput, Text, ActivityIndicator, Button } from "react-native";
 import { connect } from "react-redux";
 import { actions } from "../redux/actions";
 import { StateInterface, SearchItemInterface } from "../redux/reducers";
+import Results from "./components/Results";
 
 interface Props {
   reduxState: StateInterface;
   updateSearchResults: (text: string) => void;
   toggleItem: (item: SearchItemInterface) => void;
+  navigation?: NavigationScreenProp<any> | any;
 }
 
 class Main extends Component<Props> {
@@ -33,14 +35,17 @@ class Main extends Component<Props> {
         ) : (
           <Results
             data={this.props.reduxState.searchResults}
-            onToggle={this.props.toggleItem}
+            onResultPress={this.props.toggleItem}
           />
         )}
-        <Text>
-          {this.calculateTotalSelectedItemsStarCount(
-            this.props.reduxState.searchResults
-          )}
-        </Text>
+        <View>
+          <Button
+            title={`Show selected (${this.calculateTotalSelectedItemsStarCount(
+              this.props.reduxState.searchResults
+            )} total star count)`}
+            onPress={() => this.props.navigation.navigate("SelectedItems")}
+          />
+        </View>
       </View>
     );
   }
