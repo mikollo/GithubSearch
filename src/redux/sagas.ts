@@ -1,18 +1,7 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { actionTypes } from "./actions";
 import githubApiSearchHelper from "../utils/githubApiSearchHelper";
-import { GithubSearchItemInterface } from "../utils/githubSearchItemInterface";
-
-function selectDataFromSearchResult(searchItem: GithubSearchItemInterface) {
-  return {
-    starCount: searchItem.stargazers_count,
-    fullName: searchItem.full_name,
-    avatar: searchItem.owner.avatar_url,
-    repoLink: searchItem.html_url,
-    picked: false,
-    id: searchItem.id
-  };
-}
+import { sortSearchResults, selectDataFromSearchResult } from "./utils";
 
 function* runSearchRequest(action: any) {
   try {
@@ -20,7 +9,9 @@ function* runSearchRequest(action: any) {
     const searchResults = yield call(githubApiSearchHelper, action.payload);
     yield put({
       type: actionTypes.UPDATE_SEARCH_RESULTS_SUCCEEDED,
-      payload: searchResults.map(selectDataFromSearchResult)
+      payload: searchResults
+        .sort(sortSearchResults)
+        .map(selectDataFromSearchResult)
     });
   } catch (e) {
     yield put({ type: actionTypes.UPDATE_SEARCH_RESULTS_FAILED });

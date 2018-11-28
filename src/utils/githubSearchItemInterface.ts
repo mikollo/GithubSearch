@@ -77,7 +77,7 @@ export interface GithubSearchItemInterface {
   labels_url: string | null;
   releases_url: string | null;
   deployments_url: string | null;
-  created_at: string | null;
+  created_at: string;
   updated_at: string | null;
   pushed_at: string | null;
   git_url: string | null;
