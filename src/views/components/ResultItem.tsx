@@ -1,5 +1,12 @@
 import React from "react";
-import { TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Dimensions
+} from "react-native";
 import { SearchItemInterface } from "../../redux/reducers";
 import { theme } from "../../constants";
 interface ResultItemProps {
@@ -8,23 +15,23 @@ interface ResultItemProps {
 }
 
 const ResultItem: React.SFC<ResultItemProps> = props => (
-  <TouchableOpacity
-    style={itemStyles.container}
-    onPress={() => props.onResultPress(props.item)}
-  >
-    <Text
-      style={{
-        color: props.item.picked ? "red" : "black"
-      }}
-    >
-      {props.item.fullName}
-      {`\n`}
-      {props.item.starCount} stars
-    </Text>
-    <View style={itemStyles.avatar}>
-      <Image style={itemStyles.avatar} source={{ uri: props.item.avatar }} />
+  <TouchableWithoutFeedback onPress={() => props.onResultPress(props.item)}>
+    <View style={itemStyles.container}>
+      <Text
+        style={{
+          width: Dimensions.get("screen").width - 5 * theme.spacing,
+          color: props.item.picked ? "red" : "black"
+        }}
+      >
+        {props.item.fullName}
+        {`\n`}
+        {props.item.starCount} stars
+      </Text>
+      <View style={itemStyles.avatar}>
+        <Image style={itemStyles.avatar} source={{ uri: props.item.avatar }} />
+      </View>
     </View>
-  </TouchableOpacity>
+  </TouchableWithoutFeedback>
 );
 
 const itemStyles = StyleSheet.create({
@@ -37,7 +44,8 @@ const itemStyles = StyleSheet.create({
   avatar: {
     width: theme.spacing * 2,
     height: theme.spacing * 2,
-    borderRadius: theme.spacing
+    borderRadius: theme.spacing,
+    backgroundColor: "gray"
   }
 });
 
